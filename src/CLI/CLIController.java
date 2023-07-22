@@ -1,6 +1,6 @@
 package CLI;
 
-import Enviroment.Player.PlayerCharacter;
+import gameLogic.People.Player;
 import gameLogic.WorldState;
 
 import java.util.Objects;
@@ -8,10 +8,9 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class CLIController {
-    // main commandline interface class
     private static final Scanner input = new Scanner(System.in);
     private static WorldState world;
-    private static PlayerCharacter player;
+    private static Player player;
 
 
     public void name(){
@@ -20,8 +19,43 @@ public class CLIController {
         if (!(Objects.equals(name, ""))) player.setPlayerName(name);
     }
 
+/**
+     * Handles player input by presenting a list of options to choose from.
+     *
+     * @param options A List of strings containing the options for the player to choose from.
+     * @param actions A Function<Integer, Void> that carries out the player's chosen action.
+     * @param Optional Whether the menu can be skipped.
+     */
+    public void handleInput(List<String> options, Function<Integer, Void> actions Boolean optional;) {
+
+        // Display available options to the player
+        System.out.println("Choose an option:");
+        for (int i = 0; i < options.size(); i++) {
+            System.out.println(i + " - " + options.get(i));
+        } if (optional) { System.out.println(i + "- Leave Menu");
+
+        // Read player input
+        int selectedOption;
+        do {
+            System.out.print("Enter the number corresponding to your choice: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+            selectedOption = scanner.nextInt();
+            if (optional && selectedOption == i) {break;}
+        } while (selectedOption < 0 || selectedOption >= actions.size());
+
+        // Call the corresponding action function based on the player's choice
+        Function<Integer, Void> chosenAction = actions.get(selectedOption);
+        chosenAction.apply(selectedOption);
+
+        scanner.close();
+    }
+
     public void difficulty() {
-        System.out.println("Please select difficulty (0: easy, 1: normal, 2: hard)");
+        List<String> options = ListOf("easy", "normal",  "hard");
+System.out.println("Please select difficulty (0: easy, 1: normal, 2: hard)");
         String userInput = input.nextLine();
         try {
             int difficulty = Integer.parseInt(userInput);
