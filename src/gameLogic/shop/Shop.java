@@ -1,5 +1,6 @@
 package gameLogic.shop;
 
+import gameLogic.RandomGenerator;
 import gameLogic.monsters.Monster;
 import gameLogic.items.Item;
 
@@ -11,6 +12,7 @@ public class Shop {
     private Static List<Item> items = Item.getAll();
 
     private final String[] description;
+    private final RandomGenerator = RandomGenerator.getInstance()
     private final List<Monster> monsters = new ArrayList<Item>();
     private final List<Item> items = new ArrayList<Item>();
 
