@@ -14,28 +14,41 @@ public class Shop {
     private final List<Monster> monsters = new ArrayList<Item>();
     private final List<Item> items = new ArrayList<Item>();
 
+    public Shop(String inside, String outside);
+
     /**
-      *returns the cost to buy a monster or item of the given level and rarity.
-      *
-      * 
-      *
-      */
+     * 25% of the time adds a random number of items to shop.
+     * 50% of the time adds a random number of items and Monsters.
+     * Otherwise adds a random number of Monsters to the shop.
+     * 
+     * 
+     */
+    private void Initialize() {
+        Double wares = RandomGenerator.getRandom();
+
+    /**
+     * returns the cost to buy a monster or item of the given level and rarity.
+     *
+     */
     private static int getPurchasePrice(int rarity, int level) {
         return (int) (10 * pow((level + 1), rarity));
     }
 
-    public Shop(String inside, String outside);
 
-    public void offerWares() {
-        System.out.Println(description[2])
-        
+    /**
+     * takes the monster the player chose out of monsters and 
+     * gives it to the player if they have enough money
+     * and subtracts the cost of the monster from their wealth.
+     *
+     */
+    public void offerMonsters(Player p) {
+        List<String> options = monsters.toStream().map(m -> m.toString()).toList();
+        Function<int:void> actions = (i) -> {if(p.getWealth() < 0) {
+            p.addMonster(copyOf(monsters.get(i)); monsters.remove(i)}}
     }
-    /* TODO
-    *   purchasing
-    *   selling
-    *   monsters
-    *   items
-    *   shop rarity level
-    *   generate monsters / items
-    *   */
+
+    public void offerItems(Player p) {}
+
+    public String toString() { return description[1]; }
+
 }
