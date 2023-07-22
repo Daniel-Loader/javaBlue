@@ -1,9 +1,10 @@
 package gameLogic;
 
-import java.util.Random;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.function.
+import java.util.function.Function;
 
 public class RandomGenerator {
     private final Random random;
