@@ -83,12 +83,15 @@ public class Shop {
             System.out.println(i + " - " + options[i]);
         }
 
+        System.out.println(i + " - Leave Menu";
+
         int selectedOption;
         do {
             System.out.print("Enter the number corresponding to your choice: ");
             selectedOption = scanner.nextInt();
         } while (selectedOption < 0 || selectedOption >= options.length);
-
+        
+        if (selectedOption == options.length) return;
         if (p.getWealth() >= prices[selectedOption]) {
             p.setWealth(p.getWealth() - prices[selectedOption]);
             T selectedItem = elements.get(selectedOption);
@@ -98,30 +101,12 @@ public class Shop {
     }
 
     /**
-     * Takes the monster the player chose out of monsters and 
-     * gives it to the player if they have enough money
-     * and subtracts the cost of the monster from their wealth.
+     * offers the player the option to buy a monster;
+
      *
      * @param p The player who wants to buy the monster.
      */
-    public void offerMonsters(Player p) {
-        int[] monsterPrices = new int[monsters.size()];
-        String[] monsterStrings = new String[monsters.size()];
-
-        for (int i = 0; i < monsters.size(); i++) {
-            Monster monster = monsters.get(i);
-            monsterPrices[i] = monster.getPrice();
-            monsterStrings[i] = monster.toString();
-        }
-
-        List<String> options = monsterStrings.toList()
-        Function<int:void> actions = (i) -> {
-            if (p.getWealth() >= prices[i]) {
-                p.setWeath(()-prices[i]);
-                p.addMonster(monsters.get(i)); 
-                monsters.remove(i)
-            }
-    }
+    public void offerMonsters(Player p) {}
 
     /**
      * Offers items to the player for purchase.
