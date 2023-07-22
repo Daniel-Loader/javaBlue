@@ -66,13 +66,18 @@ public class RandomGenerator {
         scanner.close();
     }
 
-    /**  
-     * @param complete 
+    /**
+     * returns at random an element from the given list of elements.
      *
-     * 
-     * @return random
+     * @param <T>      the type of elements in the list.
+     * @param ts the list of elements to choose from.
+     * @return a randomly selected element from the list, or null if the list is empty.
      */
-    public <T> T getRandom(List<T> complete) {}
-
-
+    public <T> T getRandom(List<T> ts) {
+        if (ts.isEmpty()) {
+            return null;
+        }
+        int randomIndex = random.nextInt(complete.size());
+        return complete.get(randomIndex);
+    }
 }
