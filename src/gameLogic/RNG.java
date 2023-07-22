@@ -7,20 +7,16 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class RandomGenerator {
-    private final Random random;
+    private static RandomGenerator rng = new RandomGenerator(0L)
+    private Random random;
 
     private RandomGenerator(Long seed) {
         random = new Random(seed);
     }
 
-    /**
-     * Factory method to create a RandomGenerator instance with a specific seed.
-     *
-     * @param seed the seed for the RandomGenerator.
-     * @return a new instance of RandomGenerator.
-     */
-    public static RandomGenerator createInstance(long seed) {
-        return new RandomGenerator(seed);
+    // TODO Write JavaDoc
+    public static void setSeed(Long seed) {
+        rng.random = new Random(seed);
     }
 
     /**  
@@ -28,8 +24,8 @@ public class RandomGenerator {
      * between 0 and 1.
      * @return random double
      */
-    public Double GenerateNumber() {
-        return random.nextDouble();
+    public static Double GenerateNumber() {
+        return rng.random.nextDouble();
     }
 
     /**
@@ -73,11 +69,11 @@ public class RandomGenerator {
      * @param ts the list of elements to choose from.
      * @return a randomly selected element from the list, or null if the list is empty.
      */
-    public <T> T getRandom(List<T> ts) {
+    public static <T> T getRandom(List<T> ts) {
         if (ts.isEmpty()) {
             return null;
         }
-        int randomIndex = random.nextInt(complete.size());
-        return complete.get(randomIndex);
+        int randomIndex = rng.random.nextInt(complete.size());
+        return ts.get(randomIndex);
     }
 }
