@@ -1,18 +1,21 @@
 package gameLogic.shop;
 
+import gameLogic.monsters.Monster;
+import gameLogic.items.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 public class Shop {
-    private static List<Shop> instances = new ArrayList<>();
+    private static List<Shop>    instances   = new ArrayList<>();
     private static List<Monster> allMonsters = Monster.getAll();
-    private static List<Item> items = Item.getAll();
+    private static List<Item>    allItems    = Item.getAll();
 
-    private final String[] description;
-    private final RandomGenerator random = RandomGenerator.getInstance();
-    private final List<Monster> monsters = new ArrayList<>();
-    private final List<Item> shopItems = new ArrayList<>();
+    private final String[]        description;
+    private final RandomGenerator rng       = RandomGenerator.getInstance();
+    private final List<Monster>   monsters  = new ArrayList<>();
+    private final List<Item>      shopItems = new ArrayList<>();
     
     /**
      * Constructor for creating a new Shop instance.
@@ -21,8 +24,8 @@ public class Shop {
      * @param outside Description of the shop's exterior.
      */
     public Shop(String inside, String outside) {
-        // Initialize the shop with items, monsters, etc. based on provided parameters
-        // You can use the inside and outside descriptions to set up the shop as needed
+        This.description = {inside, outside}
+        Initialize(rng.nextInt(0,10));
     }
 
     /**
@@ -31,25 +34,23 @@ public class Shop {
      * 50% of the time adds a random number of items and monsters to the shop.
      * Otherwise, adds a random number of monsters to the shop.
      */
-    public void initialize() {
-        int maxStock = 10;
-        int currentStock = (int) (maxStock * RandomGenerator.GenerateNumber());
-        Double wares = RandomGenerator.GenerateNumber();
+    public void initialize(int currentStock) {
+        Double wares = rng.nextDouble();
         if (wares < 0.25 && monsters.size() < currentStock) {
             int intial_i = monsters.size();
             for (int i = intial_i; i < currentStock; i++) {
-                this.monsters.Add(RandomGenerator.getRandom(Shop.allMonsters))
+                this.monsters.Add(rng.getRandom(Shop.allMonsters))
             }
         } else if (wares < 0.25 && monsters.size() < currentStock || items().size() < currentStock) {
             int intial_i = min(monsters.size(), items.size);
             for (int i = intial_i; i < currentStock; i++) {
-                if (monsters.size() < i) {this.monsters.Add(RandomGenerator.getRandom(Shop.allMonsters))}
-                if (monsters.size() < i) {this.items.Add(RandomGenerator.getRandom(Shop.allItems))}
+                if (monsters.size() < i) {this.monsters.Add(rng.getRandom(Shop.allMonsters))}
+                if (monsters.size() < i) {this.items.Add(rng.getRandom(Shop.allItems))}
             }
         } else {
             int intial_i = items.size();
             for (int i = intial_i; i < currentStock; i++) {
-                this.items.Add(RandomGenerator.getRandom(Shop.allItems))
+                this.items.Add(rng.getRandom(Shop.allItems))
         }
     }
 
@@ -134,10 +135,10 @@ public class Shop {
     /**
      * Returns a string representation of the shop.
      *
-     * @return The shop's description.
+     * @return The description of the shop's exterior.
      */
     public String toString() {
-        return description[1];
+        return description[rng.nextInt(0, 1)];
     }
 
     interface Sellable { int getPrice(); }
