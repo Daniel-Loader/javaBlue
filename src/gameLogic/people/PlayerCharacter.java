@@ -15,7 +15,7 @@ public class PlayerCharacter {
     private String playerName;
     private int money;
     private int experience;
-    private CurrentParty party;
+    private Party party;
     private PlayerItems items;
 
     public PlayerCharacter() {
@@ -26,7 +26,7 @@ public class PlayerCharacter {
         this.items = new PlayerItems();
     }
 
-    public CurrentParty getParty() {
+    public Party getParty() {
         return party;
     }
     public void setParty(CurrentParty party) {
