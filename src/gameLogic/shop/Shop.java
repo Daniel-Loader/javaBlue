@@ -45,7 +45,7 @@ public class Shop {
             int intial_i = min(monsters.size(), items.size);
             for (int i = intial_i; i < currentStock; i++) {
                 if (monsters.size() < i) {this.monsters.Add(rng.getRandom(Shop.allMonsters))}
-                if (monsters.size() < i) {this.items.Add(rng.getRandom(Shop.allItems))}
+                if (items.size()    < i) {this.items.Add(rng.getRandom(Shop.allItems))}
             }
         } else {
             int intial_i = items.size();
